@@ -1,1 +1,57 @@
-# Empty CSS file for your own CSS
+body{
+    padding-top: 54px;
+    background-color: #201D1E;
+}
+.select-cafe-header{
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    background-color: #ED1F26;
+    font-size: 24px;
+    color: #ffffff;
+    background-image: url(http://lokal.lviv.ua/images/fryz_bg.png);
+    background-size: 308px;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.select-cafe-header span{
+    font-size: 16px;
+    vertical-align: super;
+    color: #ffffff;
+    letter-spacing: 12px;
+}
+
+#homepage{
+    background-color: #201D1E;
+}
+#homepage #cafes .btn{color: #fff;}
+
+#cafepage{
+    padding-top: 20px;
+}
+
+#cafeName{
+    color: #ED1F26;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+}
+
+.table>thead>tr>th {
+    color: white;
+}
+
+.breadcrumb{
+    background-color: #201D1E;
+}
+.breadcrumb a{
+    color: #777777;
+}
+.table > tbody > tr > td{
+    border-top: 1px solid rgba(237, 31, 38, 0.08);
+    color: #C5C5C5;
+}
