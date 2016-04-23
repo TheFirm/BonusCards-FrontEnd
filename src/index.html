@@ -10,6 +10,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/material-fullpalette.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/ripples.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <link href="css/style.css" rel="stylesheet">
 
     <script id="cafeButtonTemplate" type="x-tmpl-mustache">
@@ -47,18 +48,12 @@
 
             <div class="panel panel-default text-center select-cafe-header">
                 <div class="panel-body">
-                    <span>Select Cafe</span>
+                    <a href="#" id="homePageLink">
+                        <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
+                    </a>
+                    <span id="cafeName">Локаль</span>
                 </div>
             </div>
-
-            <ul class="breadcrumb">
-                <li>
-                    <a href="#" id="homePageLink">← Select Cafe</a>
-                </li>
-            </ul>
-            <h3 class="text-center" id="cafeName">
-                cafeName
-            </h3>
 
             <table class="table" id="checkinsList">
                 <thead>

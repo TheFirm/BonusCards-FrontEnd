@@ -1,5 +1,4 @@
 body{
-    padding-top: 54px;
     background-color: #201D1E;
 }
 .select-cafe-header{
@@ -19,6 +18,10 @@ body{
     text-transform: uppercase;
 }
 
+.select-cafe-header .panel-body{
+    position: relative;
+}
+
 .select-cafe-header span{
     font-size: 16px;
     vertical-align: super;
@@ -27,16 +30,25 @@ body{
 }
 
 #homepage{
+    padding-top: 54px;
     background-color: #201D1E;
 }
 #homepage #cafes .btn{color: #fff;}
+#homepage #cafes .btn:hover{box-shadow: none;}
+
+#cafes{
+    padding-top: 15px;
+}
 
 #cafepage{
     padding-top: 20px;
 }
 
+#cafepage .select-cafe-header{
+    position: static;
+}
+
 #cafeName{
-    color: #ED1F26;
     font-weight: bold;
     letter-spacing: 1.5px;
 }
@@ -54,4 +66,25 @@ body{
 .table > tbody > tr > td{
     border-top: 1px solid rgba(237, 31, 38, 0.08);
     color: #C5C5C5;
+}
+
+#homePageLink{
+    color: white;
+    display: block;
+    position: absolute;
+    left: 14px;
+    top: 14px;
+}
+
+@media (max-width: 767px) {
+    .select-cafe-header .panel-body {
+        padding: 15px 15px 15px 30px;
+    }
+}
+
+#cafepage .select-cafe-header {
+    position: static;
+    margin-top: -20px;
+    width: calc(100% + 40px);
+    margin-left: -20px;
 }
