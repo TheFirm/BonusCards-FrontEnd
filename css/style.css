@@ -68,13 +68,19 @@ body{
     color: #C5C5C5;
 }
 
+#homePageLink i{
+    line-height: 0;
+}
 #homePageLink{
     color: white;
     display: block;
     position: absolute;
     left: 18px;
-    bottom: -12px;
-    transition:opacity .2s ease
+    bottom: -9px;
+    transition:opacity .2s ease;
+    background-color: black;
+    border-radius: 100%;
+    line-height: 0.75;
 }
 
 #homePageLink:hover{
