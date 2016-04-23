@@ -72,7 +72,7 @@ body{
     color: white;
     display: block;
     position: absolute;
-    left: 14px;
+    left: 18px;
     top: 14px;
     transition:opacity .2s ease
 }
@@ -91,5 +91,5 @@ body{
     position: static;
     margin-top: -20px;
     width: calc(100% + 40px);
-    margin-left: -20px;
+    margin-left: -25px;
 }
