@@ -71,40 +71,11 @@ function selectCafe(){
     loadCheckIns(cafeID);
 }
 
-/**
- *
- * @param checkin_data
- * {
-		 *		"cafe_id": 8,
-		 *		"table_id": 213,
-		 *		"card": {
-		 *			 		"id": 141,
-		 *			"name": "",
-		 *			"code": "4444444444455",
-		 *			"service": {
-		 *				"id": 1,
-		 *				"name": "!FEST",
-		 *				"logo_url": "http://bonuscards.relevant.software/images/fest_logo.png",
-		 *				"created_at": 1456487874,
-		 *				"updated_at": 1456487874
-		 *			}
-		 *		},
-		 *		"user": {
-		 *			"id": 15,
-		 *			"facebook_user_id": 1030522417028449,
-		 *			"name": "Vova Kravchuk",
-		 *			"created_at": 1461173537,
-		 *			"updated_at": 1461335067
-		 *		},
-		 *		"created_at": 1461187035
-		 *	};
- * @returns {*|jQuery|HTMLElement}
- */
 function generateCheckinsEl(checkin_data){
     var checkin = {
         TableID: checkin_data['table_id'],
         Date: checkin_data['created_at'],
-        FestCard: checkin_data['card']['code'],
+        FestCard: checkin_data['card_code'],
         Name: checkin_data['user']['name']
     };
 
