@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,233 +10,75 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-	<script>
+    <script id="cafeButtonTemplate" type="x-tmpl-mustache">
+          <button type="button" class="btn btn-lg btn-default btn-block" style="white-space: pre-wrap;"></button>
+    </script>
+    <script id="checkInItemTemplate" type="x-tmpl-mustache">
+          <tr>
+              <td class="_TableID"></td>
+              <td class="_Date"></td>
+              <td class="visible-xs"><span class="_FestCard"></span><br/><span class="_Name"></span></td>
+              <td class="hidden-xs _FestCard"></td>
+              <td class="hidden-xs _Name"></td>
+          </tr>
 
-		//for scrolable table http://jsfiddle.net/T9Bhm/7/
+    </script>
 
-		//http://n.bonuscards.relevant.software/v1/fetch
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12" id="homepage" style="    padding-bottom: 15px;">
 
-		function loadCheckIns(cafeID){
-			$.ajax({
-				url: 'http://bonuscards.relevant.software/v1/list-check-ins?cafe_id='+cafeID,
-				dataType: 'json',
-				success: function (data){
-					setCheckIns(data.data.items);
-				}
-			});
-		}
+            <h3 class="text-center">
+                Select Cafe
+            </h3>
 
-		function setCheckIns(checkinsList){
+            <div id="cafes">
+            </div>
+        </div>
 
-			var tbodyCheckins = $('#checkinsList tbody');
+        <div class="col-md-12" id="cafepage" style="display: none;    padding-bottom: 15px;">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#" id="homePageLink">← Select Cafe</a>
+                </li>
+            </ul>
+            <h3 class="text-center" id="cafeName">
+                cafeName
+            </h3>
 
-			//clear checkins
-			tbodyCheckins.html('');
-
-			for (var checkin_key in checkinsList) {
-				var checkin = checkinsList[checkin_key];
-				// skip loop if the property is from prototype
-				if (!checkinsList.hasOwnProperty(checkin_key)) continue;
-
-				tbodyCheckins.append(generateCheckinsEl(checkin));
-			}
-
-		}
-
-		function setCafes(json){
-			for (var cafe_key in json.data) {
-				var cafe = json.data[cafe_key];
-				// skip loop if the property is from prototype
-				if (!json.data.hasOwnProperty(cafe_key)) continue;
-
-				$cafe_el = $('<button type="button" class="btn btn-lg btn-default btn-block" style="white-space: pre-wrap;">						Default						</button>');
-
-				$cafe_el.text(cafe.name);
-				$cafe_el.attr('cafe-id',cafe.id);
-
-				$cafe_el.click(selectCafe);
-
-				$('#cafes').append($cafe_el);
-			}
-		}
-
-
-
-		function loadCafes(){
-			$.ajax({
-				url: 'http://bonuscards.relevant.software/v1/cafes',
-				dataType: 'json',
-				success: setCafes
-			});
-		}
-
-
-		function selectCafe(){
-			var cafeID = $(this).attr('cafe-id');
-
-			cafeID = 1;
-			$('#cafeName').text($(this).text());
-
-			showCafePage();
-
-			loadCheckIns(cafeID);
-		}
-
-		/**
-		 *
-		 * @param checkin_data
-		 * {
-		 *		"cafe_id": 8,
-		 *		"table_id": 213,
-		 *		"card": {
-		 *			 		"id": 141,
-		 *			"name": "",
-		 *			"code": "4444444444455",
-		 *			"service": {
-		 *				"id": 1,
-		 *				"name": "!FEST",
-		 *				"logo_url": "http://bonuscards.relevant.software/images/fest_logo.png",
-		 *				"created_at": 1456487874,
-		 *				"updated_at": 1456487874
-		 *			}
-		 *		},
-		 *		"user": {
-		 *			"id": 15,
-		 *			"facebook_user_id": 1030522417028449,
-		 *			"name": "Vova Kravchuk",
-		 *			"created_at": 1461173537,
-		 *			"updated_at": 1461335067
-		 *		},
-		 *		"created_at": 1461187035
-		 *	};
-		 * @returns {*|jQuery|HTMLElement}
-		 */
-		function generateCheckinsEl(checkin_data){
-			var checkin = {
-				TableID: checkin_data['table_id'],
-				Date: checkin_data['created_at'],
-				FestCard: checkin_data['card']['code'],
-				Name: checkin_data['user']['name'],
-			};
-
-			var _tr = $('<tr><td class="_TableID"></td><td class="_Date"></td><td class="visible-xs"><span class="_FestCard"></span><br/><span class="_Name"></span></td><td class="hidden-xs _FestCard"></td><td class="hidden-xs _Name"></td></tr>');
-
-			for (var checkin_p_key in checkin) {
-				var checkin_p = checkin[checkin_p_key];
-				// skip loop if the property is from prototype
-				if (!checkin.hasOwnProperty(checkin_p_key)) continue;
-
-				_tr.find('._' + checkin_p_key).text(checkin_p)
-			}
-
-			return _tr;
-		}
-
-		function addCheckinsToStartList(checkin){
-
-			var tbodyCheckins = $('#checkinsList tbody');
-
-			var checkin = {
-		 		"cafe_id": 8,
-		 		"table_id": 213,
-		 		"card": {
-		 			 		"id": 141,
-		 			"name": "",
-		 			"code": "4444444444455",
-		 			"service": {
-		 				"id": 1,
-		 				"name": "!FEST",
-		 				"logo_url": "http://bonuscards.relevant.software/images/fest_logo.png",
-		 				"created_at": 1456487874,
-		 				"updated_at": 1456487874
-		 			}
-		 		},
-		 		"user": {
-		 			"id": 15,
-		 			"facebook_user_id": 1030522417028449,
-		 			"name": "Vova Kravchuk",
-		 			"created_at": 1461173537,
-		 			"updated_at": 1461335067
-		 		},
-		 		"created_at": 1461187035
-		 	};
-
-			tbodyCheckins.prepend(generateCheckinsEl(checkin));
-		}
-
-
-		function showHomePage(){
-			$('#homepage').show();
-			$('#cafepage').hide();
-		}
-
-		function showCafePage(){
-			$('#homepage').hide();
-			$('#cafepage').show();
-		}
-
-		$( document ).ready(function() {
-			loadCafes();
-			$('#homePageLink').click(showHomePage);
-			selectCafe();
-
-		});
-	</script>
-  </head>
-  <body>
-
-    <div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12" id="homepage" style="    padding-bottom: 15px;">
-
-			<h3 class="text-center">
-				Select Cafe
-			</h3>
-			<div id="cafes">
-			</div>
-		</div>
-
-		<div class="col-md-12" id="cafepage" style="display: none;    padding-bottom: 15px;">
-			<ul class="breadcrumb">
-				<li>
-					<a href="#" id="homePageLink">← Select Cafe</a>
-				</li>
-			</ul>
-			<h3 class="text-center" id="cafeName">
-				cafeName
-			</h3>
-
-			<table class="table table-striped" id="checkinsList">
-				<thead>
-				<tr>
-					<th>
-						TableID
-					</th>
-					<th>
-						Date
-					</th>
-					<th class="visible-xs">
-						Fest Card
-						Name
-					</th>
-					<th class="hidden-xs">
-						Fest Card
-					</th>
-					<th class="hidden-xs">
-						Name
-					</th>
-				</tr>
-				</thead>
-				<tbody>
-				</tbody>
-			</table>
-		</div>
-	</div>
+            <table class="table table-striped" id="checkinsList">
+                <thead>
+                <tr>
+                    <th>
+                        TableID
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                    <th class="visible-xs">
+                        Fest Card
+                        Name
+                    </th>
+                    <th class="hidden-xs">
+                        Fest Card
+                    </th>
+                    <th class="hidden-xs">
+                        Name
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/scripts.js"></script>
-  </body>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/mustache.js"></script>
+<script src="js/scripts.js"></script>
+</body>
 </html>
